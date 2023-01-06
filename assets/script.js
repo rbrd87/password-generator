@@ -88,14 +88,32 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+var pwOptions = {};
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-  var passwordlength = prompt("Choose a password length between 10-64 characters.");
-  passwordlength = parseInt(passwordlength);
-  var lowercaseCharacters = confirm("Add lowercase characters to your password?");
-  var uppercaseCharacters = confirm("Add uppercase characters to your password?");
-  var numericalCharacters = confirm("Add numbers to your password?");
-  var specialCharacters = confirm("Add special characters to your password?");
+  var numberOfCharacters = prompt("Choose a password length between 10-64 characters.");
+  var passwordLength = parseInt(numberOfCharacters) // Converting the passwordLength from a string to an int
+
+  // Validation of the password length chosen by the user
+  if (passwordLength < 10) {
+    alert("Password must have more than 9 characters");
+    return "";
+  }
+  if (passwordLength > 64) {
+    alert("Password must not have more than 64 characters");
+    return "";
+  }
+
+  // Saving the prompt/confirm answers in an global object named pwOptions to call later
+  pwOptions = {
+    passwordLength: passwordLength,
+    hasLowerCase: confirm("Add lowercase characters to your password?"),
+    hasUpperCase: confirm("Add uppercase characters to your password?"),
+    hasNumerical: confirm("Add numbers to your password?"),
+    hasSpecial: confirm("Add special characters to your password?"),
+  }
+
   return;
 }
 
@@ -107,6 +125,12 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions()
+  console.log(pwOptions)
+  console.log(pwOptions.hasLowerCase)
+  console.log(pwOptions.hasUpperCase)
+  console.log(pwOptions.hasNumerical)
+  console.log(pwOptions.hasSpecial)
+  console.log(pwOptions.passwordLength)
 }
 
 // Get references to the #generate element

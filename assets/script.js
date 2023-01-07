@@ -134,6 +134,26 @@ function generatePassword() {
   console.log(pwOptions.hasNumerical)
   console.log(pwOptions.hasSpecial)
   console.log(pwOptions.passwordLength)
+
+  // If the user has confirmed they want lower case, add this to the pwCharacters variable
+  if (pwOptions.hasLowerCase) {
+    pwCharacters += lowerCasedCharacters;
+  }
+  // If the user has confirmed they want upper case, add this to the pwCharacters variable
+  if (pwOptions.hasUpperCase) {
+    pwCharacters += upperCasedCharacters;
+  }
+  // If the user has confirmed they want numerical characters, add this to the pwCharacters variable
+  if (pwOptions.hasNumerical) {
+    pwCharacters += numericCharacters;
+  }
+  // If the user has confirmed they want special characters, add this to the pwCharacters variable
+  if (pwOptions.hasSpecial) {
+    pwCharacters += specialCharacters;
+  }
+
+  console.log(pwCharacters + " " + typeof pwCharacters);
+  // ! This method seems to return a string, with lots of commas. Need to return an array so that the password isn't just full of commas
 }
 
 // Get references to the #generate element

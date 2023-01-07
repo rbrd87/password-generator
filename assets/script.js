@@ -88,8 +88,8 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+// Empty object to store users password options
 var pwOptions = {};
-var pwCharacters = [];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -118,8 +118,13 @@ function getPasswordOptions() {
   return;
 }
 
-// Function created to use the pwOptions object and create the pwCharacters array for the for loop later
-function getCharacters() {
+// Function to generate password with user input
+function generatePassword() {
+  var password = "";
+  var pwCharacters = [];
+
+  getPasswordOptions()
+
   // If the user has confirmed they want lower case, add this to the pwCharacters variable
   if (pwOptions.hasLowerCase) {
     pwCharacters = pwCharacters.concat(lowerCasedCharacters);
@@ -141,17 +146,6 @@ function getCharacters() {
     alert("Please choose at least one criteria");
     return "";
   }
-
-  return pwCharacters;
-}
-
-// Function to generate password with user input
-function generatePassword() {
-  var password = "";
-
-  getPasswordOptions()
-
-  getCharacters()
 
   // A for loop to get a random character and add it to the password string. If the user selected 10 chars it will loop through 10 times etc. 
   for (var i = 0; i < pwOptions.passwordLength; i++) {

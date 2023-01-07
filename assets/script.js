@@ -90,6 +90,7 @@ var upperCasedCharacters = [
 
 var pwOptions = {};
 var pwCharacters = [];
+var password = "";
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -121,7 +122,11 @@ function getPasswordOptions() {
 // ? This could be used within generate password, but to return random chars from an array created from the users password options
 // Function for getting a random element from an array
 function getRandom(arr) {
+  for (var i = 0; i < selectedOptions.passwordLength; i++) {
+    password += arr[Math.floor(Math.random() * arr.length)];
+  }
 
+  return password;
 }
 
 // TODO: Find a way to use the pwOptions object to create the pwCharacters array of all possible chars requested so the function getRandom can get random chars
@@ -154,6 +159,10 @@ function generatePassword() {
 
   console.log(pwCharacters + " " + typeof pwCharacters);
   // ! This method seems to return a string, with lots of commas. Need to return an array so that the password isn't just full of commas
+
+  getCharString(pwCharacters)
+
+  return password;
 }
 
 // Get references to the #generate element

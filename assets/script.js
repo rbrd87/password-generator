@@ -121,24 +121,22 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
+  // A for loop to get a random character and add it to the password string. If the user selected 10 chars it will loop through 10 times etc. 
   for (var i = 0; i < pwOptions.passwordLength; i++) {
+    // Created a variable called randomIndex to store the returned array index from the array passed into the function
     var randomIndex = Math.floor(Math.random() * arr.length);
+    // Stored the random character in the randomCharacter variable to call later
     var randomCharacter = arr[randomIndex];
+    // the randomCharacter is added to the password each time the for loop iterates
     password = password + randomCharacter;
   }
-
+  // Returns the password to store in the global variable
   return password;
 }
 
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions()
-  console.log(pwOptions)
-  console.log(pwOptions.hasLowerCase)
-  console.log(pwOptions.hasUpperCase)
-  console.log(pwOptions.hasNumerical)
-  console.log(pwOptions.hasSpecial)
-  console.log(pwOptions.passwordLength)
 
   // If the user has confirmed they want lower case, add this to the pwCharacters variable
   if (pwOptions.hasLowerCase) {
@@ -155,6 +153,11 @@ function generatePassword() {
   // If the user has confirmed they want special characters, add this to the pwCharacters variable
   if (pwOptions.hasSpecial) {
     pwCharacters = pwCharacters.concat(specialCharacters);
+  }
+
+  if (!selectedOptions.hasLowerCase && !selectedOptions.hasUpperCase && !selectedOptions.hasNumerical && !selectedOptions.hasSpecial) {
+    alert("Please choose at least one criteria");
+    return "";
   }
 
   getRandom(pwCharacters)

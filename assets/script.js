@@ -119,17 +119,17 @@ function getPasswordOptions() {
   return;
 }
 
-// ? This could be used within generate password, but to return random chars from an array created from the users password options
 // Function for getting a random element from an array
 function getRandom(arr) {
-  for (var i = 0; i < selectedOptions.passwordLength; i++) {
-    password += arr[Math.floor(Math.random() * arr.length)];
+  for (var i = 0; i < pwOptions.passwordLength; i++) {
+    var randomIndex = Math.floor(Math.random() * arr.length);
+    var randomCharacter = arr[randomIndex];
+    password = password + randomCharacter;
   }
 
   return password;
 }
 
-// TODO: Find a way to use the pwOptions object to create the pwCharacters array of all possible chars requested so the function getRandom can get random chars
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions()
@@ -142,25 +142,22 @@ function generatePassword() {
 
   // If the user has confirmed they want lower case, add this to the pwCharacters variable
   if (pwOptions.hasLowerCase) {
-    pwCharacters += lowerCasedCharacters;
+    pwCharacters = pwCharacters.concat(lowerCasedCharacters);
   }
   // If the user has confirmed they want upper case, add this to the pwCharacters variable
   if (pwOptions.hasUpperCase) {
-    pwCharacters += upperCasedCharacters;
+    pwCharacters = pwCharacters.concat(upperCasedCharacters);
   }
   // If the user has confirmed they want numerical characters, add this to the pwCharacters variable
   if (pwOptions.hasNumerical) {
-    pwCharacters += numericCharacters;
+    pwCharacters = pwCharacters.concat(numericCharacters);
   }
   // If the user has confirmed they want special characters, add this to the pwCharacters variable
   if (pwOptions.hasSpecial) {
-    pwCharacters += specialCharacters;
+    pwCharacters = pwCharacters.concat(specialCharacters);
   }
 
-  console.log(pwCharacters + " " + typeof pwCharacters);
-  // ! This method seems to return a string, with lots of commas. Need to return an array so that the password isn't just full of commas
-
-  getCharString(pwCharacters)
+  getRandom(pwCharacters)
 
   return password;
 }

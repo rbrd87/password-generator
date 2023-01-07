@@ -97,6 +97,10 @@ function getPasswordOptions() {
   var passwordLength = parseInt(numberOfCharacters) // Converting the passwordLength from a string to an int
 
   // Validation of the password length chosen by the user
+  if (passwordLength = null) {
+    alert("Please enter a value");
+    return "";
+  }
   if (passwordLength < 10) {
     alert("Password must have more than 9 characters");
     return "";
@@ -114,7 +118,7 @@ function getPasswordOptions() {
     hasNumerical: confirm("Add numbers to your password?"),
     hasSpecial: confirm("Add special characters to your password?"),
   }
-
+  
   return;
 }
 

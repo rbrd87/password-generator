@@ -89,6 +89,7 @@ var upperCasedCharacters = [
 ];
 
 var pwOptions = {};
+var pwCharacters = [];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -117,11 +118,13 @@ function getPasswordOptions() {
   return;
 }
 
+// ? This could be used within generate password, but to return random chars from an array created from the users password options
 // Function for getting a random element from an array
 function getRandom(arr) {
 
 }
 
+// TODO: Find a way to use the pwOptions object to create the pwCharacters array of all possible chars requested so the function getRandom can get random chars
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions()

@@ -90,7 +90,6 @@ var upperCasedCharacters = [
 
 var pwOptions = {};
 var pwCharacters = [];
-var password = "";
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -119,25 +118,8 @@ function getPasswordOptions() {
   return;
 }
 
-// Function for getting a random element from an array
-function getRandom(arr) {
-  // A for loop to get a random character and add it to the password string. If the user selected 10 chars it will loop through 10 times etc. 
-  for (var i = 0; i < pwOptions.passwordLength; i++) {
-    // Created a variable called randomIndex to store the returned array index from the array passed into the function
-    var randomIndex = Math.floor(Math.random() * arr.length);
-    // Stored the random character in the randomCharacter variable to call later
-    var randomCharacter = arr[randomIndex];
-    // the randomCharacter is added to the password each time the for loop iterates
-    password = password + randomCharacter;
-  }
-  // Returns the password to store in the global variable
-  return password;
-}
-
-// Function to generate password with user input
-function generatePassword() {
-  getPasswordOptions()
-
+// Function created to use the pwOptions object and create the pwCharacters array for the for loop later
+function getCharacters() {
   // If the user has confirmed they want lower case, add this to the pwCharacters variable
   if (pwOptions.hasLowerCase) {
     pwCharacters = pwCharacters.concat(lowerCasedCharacters);
@@ -155,12 +137,31 @@ function generatePassword() {
     pwCharacters = pwCharacters.concat(specialCharacters);
   }
 
-  if (!selectedOptions.hasLowerCase && !selectedOptions.hasUpperCase && !selectedOptions.hasNumerical && !selectedOptions.hasSpecial) {
+  if (!pwOptions.hasLowerCase && !pwOptions.hasUpperCase && !pwOptions.hasNumerical && !pwOptions.hasSpecial) {
     alert("Please choose at least one criteria");
     return "";
   }
 
-  getRandom(pwCharacters)
+  return pwCharacters;
+}
+
+// Function to generate password with user input
+function generatePassword() {
+  var password = "";
+
+  getPasswordOptions()
+
+  getCharacters()
+
+  // A for loop to get a random character and add it to the password string. If the user selected 10 chars it will loop through 10 times etc. 
+  for (var i = 0; i < pwOptions.passwordLength; i++) {
+    // Created a variable called randomIndex to store the returned array index from the array passed into the function
+    var randomIndex = Math.floor(Math.random() * pwCharacters.length);
+    // Stored the random character in the randomCharacter variable to call later
+    var randomCharacter = pwCharacters[randomIndex];
+    // the randomCharacter is added to the password each time the for loop iterates
+    password += randomCharacter;
+  }
 
   return password;
 }
